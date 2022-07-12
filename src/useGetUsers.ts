@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { NormalizedUser, User } from './types';
+import { NormalizedUsers, User } from './types';
 
 export const useGetUsers = () => {
-  const [users, setUsers] = useState<NormalizedUser[] | null>(null);
+  const [users, setUsers] = useState<NormalizedUsers | null>(null);
+  const [userIds, setUserIds] = useState<string[] | null>(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,8 +14,12 @@ export const useGetUsers = () => {
         const res = await axios.get<User[]>(
           'https://jsonplaceholder.typicode.com/users'
         );
-        const normalizedUsers = res.data.map((user) => ({ [user.id]: user }));
+        const normalizedUsers = res.data.reduce(
+          (acc, user) => ({ [user.id]: user }),
+          {}
+        );
         setUsers(normalizedUsers);
+        setUserIds(Object.keys(normalizedUsers));
         setIsLoading(false);
       } catch (err) {
         setIsError(true);
@@ -24,5 +29,5 @@ export const useGetUsers = () => {
     fethUsers();
   }, []);
 
-  return { users, isLoading, isError };
+  return { userIds, users, isLoading, isError };
 };

@@ -3,7 +3,7 @@ import { ListContainer, StatusContainer } from './UsersList.style';
 import { CircularProgress, Typography } from '@mui/material';
 
 export const UsersList = () => {
-  const { users, isLoading, isError } = useGetUsers();
+  const { userIds, isLoading, isError } = useGetUsers();
 
   if (!isError)
     return (
@@ -19,7 +19,7 @@ export const UsersList = () => {
       </StatusContainer>
     );
 
-  if (!users)
+  if (!userIds)
     return (
       <StatusContainer>
         <Typography>No Users</Typography>

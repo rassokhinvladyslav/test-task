@@ -22,6 +22,6 @@ export interface User {
   };
 }
 
-export interface NormalizedUser {
+export interface NormalizedUsers {
   [key: number]: User;
 }
