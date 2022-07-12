@@ -1,11 +1,14 @@
+import React from 'react';
 import { useGetUsers } from '../useGetUsers';
 import { ListContainer, StatusContainer } from './UsersList.style';
 import { CircularProgress, Typography } from '@mui/material';
+import { UsersContext } from './Users.context';
+import { User } from './User';
 
 export const UsersList = () => {
-  const { userIds, isLoading, isError } = useGetUsers();
+  const { users, userIds, isLoading, isError } = useGetUsers();
 
-  if (!isError)
+  if (isError)
     return (
       <StatusContainer>
         <Typography>Something Went Wrong</Typography>
@@ -26,5 +29,13 @@ export const UsersList = () => {
       </StatusContainer>
     );
 
-  return <ListContainer>{}</ListContainer>;
+  return (
+    <ListContainer>
+      <UsersContext users={users}>
+        {userIds.map((id) => (
+          <User key={id} userId={id} />
+        ))}
+      </UsersContext>
+    </ListContainer>
+  );
 };

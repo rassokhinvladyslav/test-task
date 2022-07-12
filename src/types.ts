@@ -23,5 +23,5 @@ export interface User {
 }
 
 export interface NormalizedUsers {
-  [key: number]: User;
+  [key: string | number]: User;
 }

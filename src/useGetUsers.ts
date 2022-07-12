@@ -15,13 +15,14 @@ export const useGetUsers = () => {
           'https://jsonplaceholder.typicode.com/users'
         );
         const normalizedUsers = res.data.reduce(
-          (acc, user) => ({ [user.id]: user }),
+          (acc, user) => ({ ...acc, [user.id]: user }),
           {}
         );
         setUsers(normalizedUsers);
         setUserIds(Object.keys(normalizedUsers));
         setIsLoading(false);
       } catch (err) {
+        console.log(err);
         setIsError(true);
       }
     };
