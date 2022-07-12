@@ -1,11 +1,7 @@
 import React from 'react';
 import { useGetUsers, useFilterSearch } from './hooks';
-import {
-  ListContainer,
-  CentredContainer,
-  StyledTextField,
-} from './UsersList.style';
-import { CircularProgress, Typography } from '@mui/material';
+import { ListContainer, CentredContainer } from './UsersList.style';
+import { CircularProgress, Typography, TextField } from '@mui/material';
 import { UsersContext } from './Users.context';
 import { User } from '../User';
 
@@ -36,11 +32,7 @@ export const UsersList = () => {
 
   return (
     <CentredContainer>
-      <StyledTextField
-        onChange={handleChange}
-        value={search}
-        label={'Search'}
-      />
+      <TextField onChange={handleChange} value={search} label={'Search'} />
       <ListContainer>
         <UsersContext users={users}>
           {filteredIds?.map((id) => (

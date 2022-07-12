@@ -17,5 +17,3 @@ export const CentredContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
   padding: theme.spacing(4),
 }));
-
-export const StyledTextField = styled(TextField)(({ theme }) => ({}));
