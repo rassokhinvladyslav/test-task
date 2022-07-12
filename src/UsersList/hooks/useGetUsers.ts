@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { NormalizedUsers, User } from './types';
+import { NormalizedUsers, User } from '../../types';
 
-export const useGetUsers = () => {
+export const useGetUsers = (search: string) => {
   const [users, setUsers] = useState<NormalizedUsers | null>(null);
   const [userIds, setUserIds] = useState<string[] | null>(null);
   const [isError, setIsError] = useState(false);
@@ -30,5 +30,9 @@ export const useGetUsers = () => {
     fethUsers();
   }, []);
 
-  return { userIds, users, isLoading, isError };
+  const filteredIds = userIds?.filter(
+    (id) => users && users[id].name.toUpperCase().includes(search.toUpperCase())
+  );
+
+  return { filteredIds, users, isLoading, isError };
 };

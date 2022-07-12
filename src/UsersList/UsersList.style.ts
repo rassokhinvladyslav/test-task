@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, styled, TextField } from '@mui/material';
 
 export const ListContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -7,10 +7,15 @@ export const ListContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(4),
 }));
 
-export const StatusContainer = styled(Box)(() => ({
+export const CentredContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   height: '100%',
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+  gap: theme.spacing(4),
+  padding: theme.spacing(4),
 }));
+
+export const StyledTextField = styled(TextField)(({ theme }) => ({}));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useUserById } from '../UsersList';
 import {
   HeadTitle,
@@ -12,7 +12,7 @@ interface UserProps {
   userId: string;
 }
 
-export const User: React.FC<UserProps> = ({ userId }) => {
+export const User: React.FC<UserProps> = memo(({ userId }) => {
   const user = useUserById(userId);
 
   return (
@@ -33,4 +33,4 @@ export const User: React.FC<UserProps> = ({ userId }) => {
       </SectionContsiner>
     </UserContainer>
   );
-};
+});

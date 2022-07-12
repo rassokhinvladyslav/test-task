@@ -1,41 +1,53 @@
 import React from 'react';
-import { useGetUsers } from '../useGetUsers';
-import { ListContainer, StatusContainer } from './UsersList.style';
+import { useGetUsers, useFilterSearch } from './hooks';
+import {
+  ListContainer,
+  CentredContainer,
+  StyledTextField,
+} from './UsersList.style';
 import { CircularProgress, Typography } from '@mui/material';
 import { UsersContext } from './Users.context';
 import { User } from '../User';
 
 export const UsersList = () => {
-  const { users, userIds, isLoading, isError } = useGetUsers();
+  const { search, handleChange } = useFilterSearch();
+  const { users, filteredIds, isLoading, isError } = useGetUsers(search);
 
   if (isError)
     return (
-      <StatusContainer>
+      <CentredContainer>
         <Typography>Something Went Wrong</Typography>
-      </StatusContainer>
+      </CentredContainer>
     );
 
   if (isLoading)
     return (
-      <StatusContainer>
+      <CentredContainer>
         <CircularProgress />
-      </StatusContainer>
+      </CentredContainer>
     );
 
-  if (!userIds)
+  if (!filteredIds)
     return (
-      <StatusContainer>
+      <CentredContainer>
         <Typography>No Users</Typography>
-      </StatusContainer>
+      </CentredContainer>
     );
 
   return (
-    <ListContainer>
-      <UsersContext users={users}>
-        {userIds.map((id) => (
-          <User key={id} userId={id} />
-        ))}
-      </UsersContext>
-    </ListContainer>
+    <CentredContainer>
+      <StyledTextField
+        onChange={handleChange}
+        value={search}
+        label={'Search'}
+      />
+      <ListContainer>
+        <UsersContext users={users}>
+          {filteredIds?.map((id) => (
+            <User key={id} userId={id} />
+          ))}
+        </UsersContext>
+      </ListContainer>
+    </CentredContainer>
   );
 };
