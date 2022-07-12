@@ -21,3 +21,7 @@ export interface User {
     bs: string;
   };
 }
+
+export interface NormalizedUser {
+  [key: number]: User;
+}
