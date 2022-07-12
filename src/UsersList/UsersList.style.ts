@@ -1,9 +1,9 @@
 import { Box, styled } from '@mui/material';
 
 export const ListContainer = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
-  gridAutoRows: 'repeat(2, 1fr)',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
   gap: theme.spacing(4),
 }));
 

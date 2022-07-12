@@ -3,7 +3,7 @@ import { useGetUsers } from '../useGetUsers';
 import { ListContainer, StatusContainer } from './UsersList.style';
 import { CircularProgress, Typography } from '@mui/material';
 import { UsersContext } from './Users.context';
-import { User } from './User';
+import { User } from '../User';
 
 export const UsersList = () => {
   const { users, userIds, isLoading, isError } = useGetUsers();
